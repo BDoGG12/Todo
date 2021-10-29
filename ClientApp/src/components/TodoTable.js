@@ -1,5 +1,7 @@
 ﻿import React, { Component } from 'react';
 
-var TodoTable = (props) => {
+var TodoTable = (props) => (
+    <table>
 
-};
+    </table>
+    )
