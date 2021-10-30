@@ -1,5 +1,5 @@
 ﻿import React, { Component } from 'react';
-import TodoItem from './TodoItem';
+import TodoTable from './TodoTable';
 
 
 class TodoEntry extends Component {
@@ -10,12 +10,14 @@ class TodoEntry extends Component {
             nameEntry: '',
             descEntry: '',
             isDone: false,
-            data = []
+            data : []
         };
 
         this.handleNameChange = this.handleNameChange.bind(this);
         this.handleDescChange = this.handleDescChange.bind(this);
         this.handleIsDoneChange = this.handleIsDoneChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        console.log(this.state);
     }
 
     handleNameChange(e) {
@@ -32,10 +34,13 @@ class TodoEntry extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
+        console.log("Clicked");
         this.state.data.push({
             name: this.state.nameEntry,
-            desc: this.state.descEntry
+            description: this.state.descEntry,
+            isDone: !this.state.isDone
         });
+        console.log(this.state);
     }
 
     render() {
@@ -47,15 +52,13 @@ class TodoEntry extends Component {
                 <form onSubmit={this.handleSubmit} >
                     <label>
                         Name:
-                <input type="text" value={this.state.nameEntry} />
+                <input type="text" placeholder="Enter Todo name..." value={this.state.nameEntry} onChange={this.handleNameChange} />
                 Description:
-                <input type="text" value={this.state.descEntry} />
+                <input type="text" placeholder="Enter description..." value={this.state.descEntry} onChange={this.handleDescChange} />
                     </label>
-                    <input type="submit" value="Add" />
+                    <input type="submit" value="Add"/>
                 </form>
-                <table>
-                    <TodoItem />
-                </table>
+                <TodoTable data={this.state.data} />
             </div>
         )
 
